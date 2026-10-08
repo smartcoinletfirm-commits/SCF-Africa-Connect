@@ -10,7 +10,7 @@ const SCF_CONFIG = {
 
 const scfSupabase = window.supabase.createClient(
   "https://nbbzcykapniknsomutgl.supabase.co",
-  "YOUR_SUPABASE_PUBLISHABLE_KEY"
+  "sb_publishable_3iVzs0ELCMCX1molmhCxcA_qYgMKy9Y"
 );
 
 let currentUser = null;
