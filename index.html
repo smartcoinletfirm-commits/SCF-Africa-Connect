@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07140d">
+  <meta name="description" content="SCF Africa Connect — Connect, Grow, Learn and Earn.">
+  <title>SCF Africa Connect | Smart Coinlet Firm</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="#" onclick="showPage('home');return false;">
+    <span class="brand-mark">SCF</span>
+    <span><strong>SCF Africa Connect</strong>
+      <small>By Smart Coinlet Firm</small></span>
+  </a>
+  <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
+  <nav id="mainMenu">
+    <button onclick="showPage('home')">Home</button>
+    <button onclick="showPage('about')">About</button>
+    <button onclick="showPage('login')">Login</button>
+    <button class="nav-join" onclick="showPage('signup')">Join SCF</button>
+  </nav>
+</header>
+
+<main>
+  <section id="home" class="page active">
+    <div class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">🌍 CONNECTING AFRICAN OPPORTUNITIES</span>
+        <h1>One Africa.<br><span>More Possibilities.</span></h1>
+        <p>Connect, grow, learn and explore digital opportunities with SCF Africa Connect.</p>
+        <div class="hero-actions">
+          <button class="btn primary" onclick="showPage('signup')">Create an Account →</button>
+          <button class="btn secondary" onclick="showPage('about')">Discover SCF</button>
+        </div>
+        <p class="disclaimer">Opportunities and rewards depend on applicable SCF rules and eligibility. Earnings are not guaranteed.</p>
+      </div>
+      <div class="hero-art" aria-label="SCF Africa Connect brand illustration">
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+        <div class="africa-symbol">🌍</div>
+        <div class="floating-chip chip-one">CONNECT</div>
+        <div class="floating-chip chip-two">GROW ✦</div>
+        <div class="floating-chip chip-three">LEARN</div>
+      </div>
+    </div>
+
+    <div class="section-heading">
+      <span class="eyebrow">THE SCF EXPERIENCE</span>
+      <h2>Built around your growth</h2>
+      <p>A connected space for members to discover available opportunities.</p>
+    </div>
+
+    <div class="feature-grid">
+      <article class="feature-card">
+        <span class="feature-icon">🌍</span>
+        <h3>Connect</h3>
+        <p>Join a growing community across participating African countries.</p>
+      </article>
+      <article class="feature-card">
+        <span class="feature-icon">📚</span>
+        <h3>Learn</h3>
+        <p>Explore learning resources and develop useful digital skills.</p>
+      </article>
+      <article class="feature-card">
+        <span class="feature-icon">🧩</span>
+        <h3>Complete Tasks</h3>
+        <p>Discover eligible activities when they become available.</p>
+      </article>
+      <article class="feature-card">
+        <span class="feature-icon">🚀</span>
+        <h3>Grow</h3>
+        <p>Track your progress as you explore the SCF platform.</p>
+      </article>
+    </div>
+
+    <div class="country-strip">
+      <span>🇰🇪 Kenya</span><span>🇬🇭 Ghana</span>
+      <span>🇳🇬 Nigeria</span><span>🇹🇿 Tanzania</span>
+      <span>🇺🇬 Uganda</span>
+    </div>
+  </section>
+
+  <section id="about" class="page">
+    <div class="content-card">
+      <span class="eyebrow">OUR VISION</span>
+      <h1>About SCF Africa Connect</h1>
+      <p>SCF Africa Connect is the digital platform of Smart Coinlet Firm, designed to bring together member accounts, learning resources, eligible tasks and referral tools.</p>
+      <p>We aim to create a clear, accessible experience for members in participating countries.</p>
+      <p>Account access, payments and any rewards are subject to verification, eligibility and published platform rules.</p>
+      <button class="btn primary" onclick="showPage('signup')">Join the community →</button>
+    </div>
+  </section>
+
+  <section id="signup" class="page">
+    <div class="form-card">
+      <span class="eyebrow">BECOME A MEMBER</span>
+      <h1>Create your account</h1>
+      <p class="muted">Enter your details to register with SCF Africa Connect.</p>
+
+      <form id="signupForm">
+        <label for="fullName">Full name</label>
+        <input id="fullName" name="fullName" autocomplete="name"
+          placeholder="Enter your full name" required>
+
+        <label for="phone">Phone number</label>
+        <input id="phone" name="phone" type="tel" autocomplete="tel"
+          placeholder="+254 7XX XXX XXX" required>
+
+        <label for="email">Email address</label>
+        <input id="email" name="email" type="email" autocomplete="email"
+          placeholder="Enter your email address" required>
+
+        <label for="whatsapp">WhatsApp number</label>
+        <input id="whatsapp" name="whatsapp" type="tel"
+          placeholder="Enter your WhatsApp number" required>
+
+        <label for="country">Country</label>
+        <select id="country" name="country" required>
+          <option value="Kenya">🇰🇪 Kenya</option>
+          <option value="Ghana">🇬🇭 Ghana</option>
+          <option value="Nigeria">🇳🇬 Nigeria</option>
+          <option value="Tanzania">🇹🇿 Tanzania</option>
+          <option value="Uganda">🇺🇬 Uganda</option>
+        </select>
+
+        <label for="education">Level of education</label>
+        <select id="education" name="education" required>
+          <option value="">Select your education level</option>
+          <option>Primary</option>
+          <option>Secondary</option>
+          <option>College</option>
+          <option>University</option>
+          <option>Graduate</option>
+          <option>Other</option>
+        </select>
+
+        <label for="referralCode">Referral code <span class="muted">(Optional)</span></label>
+        <input id="referralCode" name="referralCode"
+          placeholder="e.g. SCF-8A71F2C9" autocomplete="off">
+        <small class="help-text">If a member invited you, enter their unique code.</small>
+
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password"
+          autocomplete="new-password" minlength="8"
+          placeholder="At least 8 characters" required>
+
+        <label for="confirmPassword">Confirm password</label>
+        <input id="confirmPassword" name="confirmPassword" type="password"
+          autocomplete="new-password" minlength="8"
+          placeholder="Enter your password again" required>
+
+        <label class="check-row">
+          <input id="agreeTerms" type="checkbox" required>
+          <span>I agree to follow the SCF platform rules and privacy terms.</span>
+        </label>
+
+        <button class="btn primary full" type="submit">Create SCF Account</button>
+        <p id="signupMessage" class="form-message" role="status"></p>
+      </form>
+
+      <p class="form-footer">Already registered?
+        <button class="text-link" onclick="showPage('login')">Log in</button>
+      </p>
+    </div>
+  </section>
+
+  <section id="login" class="page">
+    <div class="form-card">
+      <span class="eyebrow">WELCOME BACK</span>
+      <h1>Member login</h1>
+      <p class="muted">Log in to check your account status.</p>
+      <form id="loginForm">
+        <label for="loginEmail">Email address</label>
+        <input id="loginEmail" type="email" autocomplete="email"
+          placeholder="Enter your registered email" required>
+        <label for="loginPassword">Password</label>
+        <input id="loginPassword" type="password"
+          autocomplete="current-password" required>
+        <button class="btn primary full" type="submit">Log in</button>
+        <p id="loginMessage" class="form-message" role="status"></p>
+      </form>
+      <p class="form-footer">New to SCF?
+        <button class="text-link" onclick="showPage('signup')">Create an account</button>
+      </p>
+    </div>
+  </section>
+
+  <section id="waiting" class="page">
+    <div class="waiting-card">
+      <div class="waiting-art" role="img" aria-label="Friendly illustration of someone relaxing while waiting">
+        <div class="sun"></div>
+        <div class="plant">🌿</div>
+        <div class="waiting-person">
+          <div class="person-head">😊</div>
+          <div class="person-body"></div>
+          <div class="person-laptop">SCF</div>
+        </div>
+        <div class="coffee">☕</div>
+      </div>
+      <span class="status-pill"><span class="status-dot"></span> ACCOUNT PENDING REVIEW</span>
+      <h1>Just a little more time!</h1>
+      <p>Thanks for joining SCF Africa Connect. Your account is waiting for manual approval by our administrator.</p>
+
+      <div class="notice-box">
+        <span class="notice-icon">🕒</span>
+        <div>
+          <strong>Approval takes approximately 6–12 hours.</strong>
+          <p>Please be patient while your account is reviewed. This is an estimate, not a guaranteed deadline.</p>
+        </div>
+      </div>
+
+      <div class="notice-box">
+        <span class="notice-icon">✉️</span>
+        <div>
+          <strong>Experiencing a delay?</strong>
+          <p>Contact <a href="mailto:smartcoinlet@gmail.com">smartcoinlet@gmail.com</a> for assistance.</p>
+        </div>
+      </div>
+
+      <p class="waiting-quote">“Good things take a little time.”</p>
+      <p class="muted">Your dashboard remains locked until an administrator approves your account.</p>
+      <button class="btn secondary full" onclick="checkAccountStatus()">Check approval status</button>
+      <button class="text-link" onclick="logout()">Log out</button>
+      <div id="waitingMessage" class="form-message" role="status"></div>
+    </div>
+  </section>
+
+  <section id="activation" class="page">
+    <div class="content-card">
+      <span class="eyebrow">MEMBER ACTIVATION</span>
+      <h1>Choose your country</h1>
+      <p>Payment options will appear here when they are configured and enabled by SCF administrators.</p>
+      <p>For your security, paying alone does not automatically approve an account. Payment confirmation and account approval are separate steps.</p>
+      <button class="btn secondary" onclick="showPage('waiting')">Return to waiting page</button>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-brand">SCF <span>Africa Connect</span></div>
+  <p>Connect • Grow • Learn • Earn</p>
+  <p><a href="mailto:smartcoinlet@gmail.com">smartcoinlet@gmail.com</a></p>
+  <small>© 2026 Smart Coinlet Firm. All rights reserved.</small>
+</footer>
+
+<script src="./script.js"></script>
+</body>
+        </html>
