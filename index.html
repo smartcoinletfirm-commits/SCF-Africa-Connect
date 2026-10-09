@@ -18,9 +18,7 @@
       <small>By Smart Coinlet Firm</small>
     </span>
   </a>
-
   <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
-
   <nav id="mainMenu">
     <button onclick="showPage('home')">Home</button>
     <button onclick="showPage('about')">About</button>
@@ -36,19 +34,13 @@
         <span class="eyebrow">🌍 CONNECTING AFRICAN OPPORTUNITIES</span>
         <h1>One Africa.<br><span>More Possibilities.</span></h1>
         <p>Connect, grow, learn and explore digital opportunities with SCF Africa Connect.</p>
-
         <div class="hero-actions">
           <button class="btn primary" onclick="showPage('signup')">Create an Account →</button>
           <button class="btn secondary" onclick="showPage('about')">Discover SCF</button>
         </div>
-
-        <p class="disclaimer">
-          Opportunities and rewards depend on applicable SCF rules and eligibility.
-          Earnings are not guaranteed.
-        </p>
+        <p class="disclaimer">Opportunities and rewards depend on applicable SCF rules and eligibility. Earnings are not guaranteed.</p>
       </div>
-
-      <div class="hero-art" aria-label="SCF Africa Connect brand illustration">
+      <div class="hero-art" aria-label="SCF Africa Connect illustration">
         <div class="orbit orbit-one"></div>
         <div class="orbit orbit-two"></div>
         <div class="africa-symbol">🌍</div>
@@ -68,21 +60,18 @@
       <article class="feature-card">
         <span class="feature-icon">🌍</span>
         <h3>Connect</h3>
-        <p>Join a growing community across participating African countries.</p>
+        <p>Join a community across participating African countries.</p>
       </article>
-
       <article class="feature-card">
         <span class="feature-icon">📚</span>
         <h3>Learn</h3>
         <p>Explore learning resources and develop useful digital skills.</p>
       </article>
-
       <article class="feature-card">
         <span class="feature-icon">🧩</span>
         <h3>Complete Tasks</h3>
-        <p>Discover eligible activities when they become available.</p>
+        <p>Discover eligible activities when available.</p>
       </article>
-
       <article class="feature-card">
         <span class="feature-icon">🚀</span>
         <h3>Grow</h3>
@@ -105,7 +94,7 @@
       <h1>About SCF Africa Connect</h1>
       <p>SCF Africa Connect is the digital platform of Smart Coinlet Firm, designed to bring together member accounts, learning resources, eligible tasks and referral tools.</p>
       <p>We aim to create a clear, accessible experience for members in participating countries.</p>
-      <p>Account access, payments and any rewards are subject to verification, eligibility and published platform rules.</p>
+      <p>Account access, payments and rewards are subject to verification, eligibility and published platform rules.</p>
       <button class="btn primary" onclick="showPage('signup')">Join the community →</button>
     </div>
   </section>
@@ -141,16 +130,16 @@
         <label for="education">Level of education</label>
         <select id="education" name="education" required>
           <option value="">Select your education level</option>
-          <option>Primary</option>
-          <option>Secondary</option>
-          <option>College</option>
-          <option>University</option>
-          <option>Graduate</option>
-          <option>Other</option>
+          <option value="Primary">Primary</option>
+          <option value="Secondary">Secondary</option>
+          <option value="College">College</option>
+          <option value="University">University</option>
+          <option value="Graduate">Graduate</option>
+          <option value="Other">Other</option>
         </select>
 
         <label for="referralCode">Referral code <span class="muted">(Optional)</span></label>
-        <input id="referralCode" name="referralCode" placeholder="e.g. SCF-8A71F2C9" autocomplete="off">
+        <input id="referralCode" name="referralCode" placeholder="Enter referral code" autocomplete="off">
         <small class="help-text">If a member invited you, enter their unique code.</small>
 
         <label for="password">Password</label>
@@ -168,8 +157,7 @@
         <p id="signupMessage" class="form-message" role="status" aria-live="polite"></p>
       </form>
 
-      <p class="form-footer">
-        Already registered?
+      <p class="form-footer">Already registered?
         <button class="text-link" onclick="showPage('login')">Log in</button>
       </p>
     </div>
@@ -180,7 +168,6 @@
       <span class="eyebrow">WELCOME BACK</span>
       <h1>Member login</h1>
       <p class="muted">Log in to check your account status.</p>
-
       <form id="loginForm">
         <label for="loginEmail">Email address</label>
         <input id="loginEmail" type="email" autocomplete="email" placeholder="Enter your registered email" required>
@@ -191,11 +178,53 @@
         <button class="btn primary full" type="submit">Log in</button>
         <p id="loginMessage" class="form-message" role="status" aria-live="polite"></p>
       </form>
-
-      <p class="form-footer">
-        New to SCF?
+      <p class="form-footer">New to SCF?
         <button class="text-link" onclick="showPage('signup')">Create an account</button>
       </p>
+    </div>
+  </section>
+
+  <section id="activation" class="page">
+    <div class="content-card activation-card">
+      <span class="eyebrow">MEMBER ACTIVATION</span>
+      <h1>Activate your SCF account</h1>
+      <p>Choose your country and membership level. Each button opens its Payd payment page.</p>
+
+      <div class="notice-box">
+        <span class="notice-icon">🔐</span>
+        <div>
+          <strong>Payment and approval are separate</strong>
+          <p>Keep your payment receipt. Opening a payment link does not confirm payment or approve your account. An administrator must check payment and approve your account.</p>
+        </div>
+      </div>
+
+      <h2>🇰🇪 Kenya</h2>
+      <div class="activation-levels">
+        <a class="btn primary full" href="https://app.payd.money/link/scf" target="_blank" rel="noopener noreferrer">🇰🇪 Kenya — Level 1 · Pay with Payd ↗</a>
+        <a class="btn primary full" href="https://app.payd.money/link/scfkl2" target="_blank" rel="noopener noreferrer">🇰🇪 Kenya — Level 2 · Pay with Payd ↗</a>
+        <a class="btn primary full" href="https://app.payd.money/link/scfkl3" target="_blank" rel="noopener noreferrer">🇰🇪 Kenya — Level 3 · Pay with Payd ↗</a>
+        <a class="btn primary full" href="https://app.payd.money/link/scfkl4" target="_blank" rel="noopener noreferrer">🇰🇪 Kenya — Level 4 · Pay with Payd ↗</a>
+      </div>
+
+      <h2>🌍 Other countries</h2>
+      <div class="activation-levels">
+        <button class="btn secondary full" type="button" disabled>🇬🇭 Ghana — Coming Soon</button>
+        <button class="btn secondary full" type="button" disabled>🇳🇬 Nigeria — Coming Soon</button>
+        <button class="btn secondary full" type="button" disabled>🇹🇿 Tanzania — Coming Soon</button>
+        <button class="btn secondary full" type="button" disabled>🇺🇬 Uganda — Coming Soon</button>
+      </div>
+
+      <div class="notice-box">
+        <span class="notice-icon">✉️</span>
+        <div>
+          <strong>Need help?</strong>
+          <p>Contact <a href="mailto:smartcoinlet@gmail.com">smartcoinlet@gmail.com</a>.</p>
+        </div>
+      </div>
+
+      <button class="btn secondary full" type="button" onclick="checkAccountStatus()">Check account status</button>
+      <button class="text-link" type="button" onclick="logout()">Log out</button>
+      <p class="muted">Do not pay more than once for the same intended activation. Keep your receipt for review.</p>
     </div>
   </section>
 
@@ -213,41 +242,30 @@
       </div>
 
       <span class="status-pill"><span class="status-dot"></span> ACCOUNT PENDING REVIEW</span>
-      <h1>Just a little more time!</h1>
-      <p>Thanks for joining SCF Africa Connect. Your account is waiting for manual approval by our administrator.</p>
+      <h1>Your account is under review</h1>
+      <p>Thank you for joining SCF Africa Connect. Your account will remain restricted until an administrator reviews it.</p>
 
       <div class="notice-box">
         <span class="notice-icon">🕒</span>
         <div>
-          <strong>Approval takes approximately 6–12 hours.</strong>
-          <p>Please be patient while your account is reviewed. This is an estimate, not a guaranteed deadline.</p>
+          <strong>Allow time for review</strong>
+          <p>Processing times can vary. The 6–12 hour estimate is not guaranteed.</p>
         </div>
       </div>
 
       <div class="notice-box">
         <span class="notice-icon">✉️</span>
         <div>
-          <strong>Experiencing a delay?</strong>
-          <p>Contact <a href="mailto:smartcoinlet@gmail.com">smartcoinlet@gmail.com</a> for assistance.</p>
+          <strong>Need assistance?</strong>
+          <p>Contact <a href="mailto:smartcoinlet@gmail.com">smartcoinlet@gmail.com</a>.</p>
         </div>
       </div>
 
       <p class="waiting-quote">“Good things take a little time.”</p>
-      <p class="muted">Your dashboard remains locked until an administrator approves your account.</p>
-
+      <p class="muted">Your protected member features remain locked until approval.</p>
       <button class="btn secondary full" onclick="checkAccountStatus()">Check approval status</button>
       <button class="text-link" onclick="logout()">Log out</button>
       <div id="waitingMessage" class="form-message" role="status" aria-live="polite"></div>
-    </div>
-  </section>
-
-  <section id="activation" class="page">
-    <div class="content-card">
-      <span class="eyebrow">MEMBER ACTIVATION</span>
-      <h1>Choose your country</h1>
-      <p>Payment options will appear here when they are configured and enabled by SCF administrators.</p>
-      <p>For your security, paying alone does not automatically approve an account. Payment confirmation and account approval are separate steps.</p>
-      <button class="btn secondary" onclick="showPage('waiting')">Return to waiting page</button>
     </div>
   </section>
 </main>
@@ -259,7 +277,6 @@
   <small>© 2026 Smart Coinlet Firm. All rights reserved.</small>
 </footer>
 
-<!-- Supabase client loads before the existing SCF JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   window.SCF_SUPABASE_URL = "https://nbbzcykapniknsomutgl.supabase.co";
