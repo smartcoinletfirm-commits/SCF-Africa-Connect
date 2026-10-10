@@ -1,10 +1,8 @@
 /* SCF Africa Connect
-   Navigation, Supabase authentication,
-   email verification and member approval.
+   Navigation, Supabase authentication and member approval.
 */
 
 const SCF_CONFIG = {
-  supabaseConnected: true,
   supportEmail: "smartcoinlet@gmail.com",
   adminEmail: "smartcoinlet@gmail.com",
   siteUrl: "https://smartcoinletfirm-commits.github.io/SCF-Africa-Connect/"
@@ -22,9 +20,9 @@ function showPage(pageId) {
   const target = document.getElementById(pageId);
   if (!target) return;
 
-  document.querySelectorAll(".page").forEach(page =>
-    page.classList.remove("active")
-  );
+  document.querySelectorAll(".page").forEach(page => {
+    page.classList.remove("active");
+  });
 
   target.classList.add("active");
   closeMenu();
@@ -65,24 +63,25 @@ function friendlyError(error) {
   }
 
   if (/email not confirmed/i.test(message)) {
-    return "Please verify your email before logging in.";
+    return "Email confirmation is enabled in Supabase. Confirm your email or disable confirmation in Supabase Authentication settings.";
   }
 
   if (/row-level security|permission denied/i.test(message)) {
-    return "Your account could not access its profile. Please contact SCF support.";
+    return "Your profile could not be accessed. Please contact SCF support.";
   }
 
   return message;
 }
 
+// LOAD PROFILE
+// Email is deliberately omitted because the profiles table
+// does not currently have an email column.
 async function loadMyProfile() {
   if (!currentUser) return null;
 
   const { data, error } = await scfSupabase
     .from("profiles")
-    .select(
-      "id, full_name, email, referral_code, approval_status, role"
-    )
+    .select("id, full_name, referral_code, approval_status, role")
     .eq("id", currentUser.id)
     .maybeSingle();
 
@@ -90,7 +89,7 @@ async function loadMyProfile() {
 
   if (!data) {
     throw new Error(
-      "Your profile is not ready. Contact smartcoinlet@gmail.com."
+      "Your profile record was not found. Check that Supabase creates a profiles row for new users."
     );
   }
 
@@ -98,48 +97,47 @@ async function loadMyProfile() {
   return data;
 }
 
+// ROUTE USERS AFTER LOGIN OR STATUS CHECK
 async function routeSignedInUser() {
   try {
     const profile = await loadMyProfile();
 
     if (profile.role === "admin") {
       showPage("waiting");
-
       showMessage(
         "waitingMessage",
-        "Administrator signed in. Manage member approvals in Supabase Table Editor. The website admin dashboard has not yet been built.",
+        "Administrator signed in. Member approvals are currently managed through Supabase Table Editor.",
         "info"
       );
-
       return;
     }
 
     if (profile.approval_status === "approved") {
-      // Replace with the dashboard page when it is implemented.
+      // Protected dashboard is not implemented yet.
       showPage("activation");
+      showMessage(
+        "waitingMessage",
+        "Your account is approved. Member dashboard features are being prepared.",
+        "success"
+      );
       return;
     }
 
     if (profile.approval_status === "rejected") {
       showPage("waiting");
-
       showMessage(
         "waitingMessage",
         "Your account was not approved. Contact smartcoinlet@gmail.com for assistance.",
         "error"
       );
-
       return;
     }
 
-    showPage("waiting");
-
-    showMessage(
-      "waitingMessage",
-      "Your email is verified and your account is awaiting administrator approval.",
-      "info"
-    );
+    // Existing pending users see the activation/payment options
+    // so they can review their available Payd links.
+    showPage("activation");
   } catch (error) {
+    console.error("SCF profile loading error:", error);
     showPage("waiting");
     showMessage("waitingMessage", friendlyError(error), "error");
   }
@@ -151,65 +149,36 @@ const signupForm = document.getElementById("signupForm");
 signupForm?.addEventListener("submit", async event => {
   event.preventDefault();
 
-  const fullName =
-    document.getElementById("fullName").value.trim();
-  const phone =
-    document.getElementById("phone").value.trim();
-  const email =
-    document.getElementById("email").value.trim().toLowerCase();
-  const whatsapp =
-    document.getElementById("whatsapp").value.trim();
-  const country =
-    document.getElementById("country").value;
-  const education =
-    document.getElementById("education").value;
-  const referralCode =
-    document.getElementById("referralCode").value.trim();
-  const password =
-    document.getElementById("password").value;
-  const confirmPassword =
-    document.getElementById("confirmPassword").value;
+  const fullName = document.getElementById("fullName").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const email = document.getElementById("email").value.trim().toLowerCase();
+  const whatsapp = document.getElementById("whatsapp").value.trim();
+  const country = document.getElementById("country").value;
+  const education = document.getElementById("education").value;
+  const referralCode = document.getElementById("referralCode").value.trim();
+  const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
 
   if (
-    !fullName ||
-    !phone ||
-    !email ||
-    !whatsapp ||
-    !country ||
-    !education
+    !fullName || !phone || !email || !whatsapp ||
+    !country || !education
   ) {
-    showMessage(
-      "signupMessage",
-      "Please complete all required fields.",
-      "error"
-    );
+    showMessage("signupMessage", "Please complete all required fields.", "error");
     return;
   }
 
   if (password.length < 8) {
-    showMessage(
-      "signupMessage",
-      "Password must contain at least 8 characters.",
-      "error"
-    );
+    showMessage("signupMessage", "Password must contain at least 8 characters.", "error");
     return;
   }
 
   if (password !== confirmPassword) {
-    showMessage(
-      "signupMessage",
-      "The passwords do not match.",
-      "error"
-    );
+    showMessage("signupMessage", "The passwords do not match.", "error");
     return;
   }
 
   if (!document.getElementById("agreeTerms").checked) {
-    showMessage(
-      "signupMessage",
-      "Please agree to the SCF platform rules.",
-      "error"
-    );
+    showMessage("signupMessage", "Please agree to the SCF platform rules.", "error");
     return;
   }
 
@@ -220,9 +189,7 @@ signupForm?.addEventListener("submit", async event => {
       email,
       password,
       options: {
-        // Return the verification link to the published website.
         emailRedirectTo: SCF_CONFIG.siteUrl,
-
         data: {
           full_name: fullName,
           phone,
@@ -236,28 +203,30 @@ signupForm?.addEventListener("submit", async event => {
 
     if (error) throw error;
 
-    if (data.session && data.user) {
-      currentUser = data.user;
-      await routeSignedInUser();
+    if (!data.user) {
+      throw new Error("Registration did not return a user. Please try again.");
+    }
 
+    currentUser = data.user;
+
+    if (data.session) {
+      // Successful signup: show the Payd activation buttons first.
+      showPage("activation");
       showMessage(
         "signupMessage",
-        "Registration successful.",
+        "Registration successful. Choose your country and activation level.",
         "success"
       );
     } else {
+      // Supabase email confirmation is enabled, so no session exists yet.
       showMessage(
         "signupMessage",
-        "Registration received. Check your email for a verification link. After verifying, return to this website and log in to check your approval status.",
-        "success"
+        "Your account was created, but Supabase requires email confirmation before login. Check your email to continue.",
+        "info"
       );
     }
   } catch (error) {
-    showMessage(
-      "signupMessage",
-      friendlyError(error),
-      "error"
-    );
+    showMessage("signupMessage", friendlyError(error), "error");
   } finally {
     setBusy(signupForm, false);
   }
@@ -269,72 +238,51 @@ const loginForm = document.getElementById("loginForm");
 loginForm?.addEventListener("submit", async event => {
   event.preventDefault();
 
-  const email =
-    document.getElementById("loginEmail").value.trim().toLowerCase();
-  const password =
-    document.getElementById("loginPassword").value;
+  const email = document.getElementById("loginEmail").value.trim().toLowerCase();
+  const password = document.getElementById("loginPassword").value;
 
   if (!email || !password) {
-    showMessage(
-      "loginMessage",
-      "Enter your email and password.",
-      "error"
-    );
+    showMessage("loginMessage", "Enter your email and password.", "error");
     return;
   }
 
   setBusy(loginForm, true);
 
   try {
-    const { data, error } =
-      await scfSupabase.auth.signInWithPassword({
-        email,
-        password
-      });
+    const { data, error } = await scfSupabase.auth.signInWithPassword({
+      email,
+      password
+    });
 
     if (error) throw error;
 
     currentUser = data.user;
     await routeSignedInUser();
   } catch (error) {
-    showMessage(
-      "loginMessage",
-      friendlyError(error),
-      "error"
-    );
+    showMessage("loginMessage", friendlyError(error), "error");
   } finally {
     setBusy(loginForm, false);
   }
 });
 
-// CHECK MEMBER APPROVAL STATUS
+// CHECK ACCOUNT STATUS
 async function checkAccountStatus() {
   try {
-    const { data, error } =
-      await scfSupabase.auth.getSession();
-
+    const { data, error } = await scfSupabase.auth.getSession();
     if (error) throw error;
 
     currentUser = data.session?.user || null;
 
     if (!currentUser) {
-      showMessage(
-        "waitingMessage",
-        "Please log in to check your account status.",
-        "info"
-      );
-
       showPage("login");
+      showMessage("loginMessage", "Please log in to check your account status.", "info");
       return;
     }
 
     await routeSignedInUser();
   } catch (error) {
-    showMessage(
-      "waitingMessage",
-      friendlyError(error),
-      "error"
-    );
+    showPage("waiting");
+    showMessage("waitingMessage", friendlyError(error), "error");
   }
 }
 
@@ -343,11 +291,7 @@ async function logout() {
   const { error } = await scfSupabase.auth.signOut();
 
   if (error) {
-    showMessage(
-      "waitingMessage",
-      friendlyError(error),
-      "error"
-    );
+    showMessage("waitingMessage", friendlyError(error), "error");
     return;
   }
 
@@ -366,8 +310,7 @@ document.addEventListener("click", event => {
   const toggle = document.querySelector(".menu-toggle");
 
   if (
-    menu &&
-    toggle &&
+    menu && toggle &&
     !menu.contains(event.target) &&
     !toggle.contains(event.target)
   ) {
@@ -375,12 +318,10 @@ document.addEventListener("click", event => {
   }
 });
 
-// INITIAL PAGE AND EXISTING SESSION
+// RESTORE EXISTING LOGIN SESSION
 document.addEventListener("DOMContentLoaded", async () => {
   try {
-    const { data, error } =
-      await scfSupabase.auth.getSession();
-
+    const { data, error } = await scfSupabase.auth.getSession();
     if (error) throw error;
 
     currentUser = data.session?.user || null;
@@ -396,7 +337,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
 
-// KEEP TRACK OF AUTHENTICATION CHANGES
+// TRACK AUTHENTICATION CHANGES
 scfSupabase.auth.onAuthStateChange((_event, session) => {
   currentUser = session?.user || null;
 });
